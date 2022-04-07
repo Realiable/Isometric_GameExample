@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Anim_RobotKyleOverride
+  m_Controller: {fileID: 9100000, guid: 2f58c8e38af44a345afb11be9c3aac43, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: a8c103f8df2857b4b999ea73aabb6dc2, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a8c103f8df2857b4b999ea73aabb6dc2, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d52b81c9e7289294f8c814dd1a95e31b, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d52b81c9e7289294f8c814dd1a95e31b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 89f1c24ed764cd443ae6eb0b1a6a936d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 89f1c24ed764cd443ae6eb0b1a6a936d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 93ca26e8ee5ef5c4d9d4deb249578180, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 93ca26e8ee5ef5c4d9d4deb249578180, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 78ce2f38869d629488a63ba07443d4ae, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 78ce2f38869d629488a63ba07443d4ae, type: 2}
