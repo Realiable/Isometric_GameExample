@@ -1,0 +1,170 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &912728558705048924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 912728558705048923}
+  - component: {fileID: 912728558705048921}
+  - component: {fileID: 912728558705048922}
+  - component: {fileID: 6100796242605645603}
+  - component: {fileID: 280962740688763382}
+  m_Layer: 9
+  m_Name: MagicMissile_Projectile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &912728558705048923
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912728558705048924}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.515, y: 0.895, z: -10.716}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 911325587941724104}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &912728558705048921
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912728558705048924}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!65 &912728558705048922
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912728558705048924}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.35, y: 0.35, z: 0.35}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6100796242605645603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912728558705048924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4cb0c1b534b562428801052c10dbc8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &280962740688763382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912728558705048924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e87ba69598628a445ae6ab65046d6f27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PhysicsSystem: {fileID: 912728558705048921}
+  projectileSpeed: 10
+  spawnVFXWhenDestroy: {fileID: 2167851140766991025, guid: fdb6f74cb704ddb4c8cc4d3e2ea36ad8, type: 3}
+  ownerCharacter: {fileID: 0}
+  projectileSpeedMultiplier: 1
+  projectileDamage: 5
+--- !u!1001 &9139067405377804620
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 912728558705048923}
+    m_Modifications:
+    - target: {fileID: 8246601818371036804, guid: 9d33c18b83c7c8441b986b09b703972a, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246601818371036804, guid: 9d33c18b83c7c8441b986b09b703972a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246601818371036804, guid: 9d33c18b83c7c8441b986b09b703972a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246601818371036804, guid: 9d33c18b83c7c8441b986b09b703972a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246601818371036804, guid: 9d33c18b83c7c8441b986b09b703972a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246601818371036804, guid: 9d33c18b83c7c8441b986b09b703972a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246601818371036804, guid: 9d33c18b83c7c8441b986b09b703972a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246601818371036804, guid: 9d33c18b83c7c8441b986b09b703972a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246601818371036804, guid: 9d33c18b83c7c8441b986b09b703972a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246601818371036804, guid: 9d33c18b83c7c8441b986b09b703972a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246601818371036804, guid: 9d33c18b83c7c8441b986b09b703972a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246601818371036804, guid: 9d33c18b83c7c8441b986b09b703972a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246601818371036804, guid: 9d33c18b83c7c8441b986b09b703972a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246601818371036804, guid: 9d33c18b83c7c8441b986b09b703972a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249453456996829066, guid: 9d33c18b83c7c8441b986b09b703972a, type: 3}
+      propertyPath: m_Name
+      value: Magic Missile
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9d33c18b83c7c8441b986b09b703972a, type: 3}
+--- !u!4 &911325587941724104 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8246601818371036804, guid: 9d33c18b83c7c8441b986b09b703972a, type: 3}
+  m_PrefabInstance: {fileID: 9139067405377804620}
+  m_PrefabAsset: {fileID: 0}

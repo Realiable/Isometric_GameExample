@@ -13,5 +13,20 @@ MonoBehaviour:
   m_Name: Skill_MagicMissile
   m_EditorClassIdentifier: 
   SkillName: Magic Missile
+  SkillType: 1
   SkillAnimation: {fileID: 7400000, guid: 93ca26e8ee5ef5c4d9d4deb249578180, type: 2}
+  SkillSpeedMultiplier: 1
   SkillDamageMultiplier: 1
+  PushForwardForce: 0
+  KnockbackForce: 100
+  KnockupForce: 0
+  collisionType: 0
+  collisionWidth: 1
+  collisionHeight: 1
+  collisionRange: 1
+  spawnProjectileObject: {fileID: 912728558705048924, guid: 89aac51b464f0084eb09582aad7a0a71, type: 3}
+  projectileSpeedMultiplier: 1
+  spawnVFXWhenHit: {fileID: 0}
+  specialBehavior: 0
+  applyAimAssist: 1
+  aimAssistRange: 10

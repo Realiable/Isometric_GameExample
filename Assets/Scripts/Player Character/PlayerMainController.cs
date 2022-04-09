@@ -10,10 +10,14 @@ public class PlayerMainController : MonoBehaviour
     private PlayerInformation playerInformation;
     private AnimatorOverrideController characterAnimatorOverride;
 
+    private int lastedHealth = 100;
+
     private void Start()
     {
         characterProperties = gameObject.GetComponent<CharacterProperties>();
         playerInformation = gameObject.GetComponent<PlayerInformation>();
+
+        lastedHealth = characterProperties.Get_CurrentHealth();
 
         Setup_PlayerAttackingMotion();
     }
@@ -33,15 +37,24 @@ public class PlayerMainController : MonoBehaviour
 
     private void Update()
     {
-        Input_MovementController();
+        if(playerInformation.isAlive == true)
+        {
+            State_HealthCheck();
+            State_KnockbackAndKnockupCheck();
+            Input_MovementController();
+        }
     }
 
     private void FixedUpdate()
     {
-        if (playerInformation.onAttacking == false)
+        if (playerInformation.Can_CharacterMove() == true)
         {
             Input_MovementBehavior();
         }
+
+        Vector3 finalVelocity = playerInformation.movingDirection * characterProperties.CharacterInformation.MovementSpeed;
+        Vector3 finalVelocityWithGravity = new Vector3(finalVelocity.x, playerInformation.physicsSystem.velocity.y, finalVelocity.z);
+        playerInformation.characterAnimator.SetFloat("CurrentVelocity", finalVelocity.magnitude);
     }
 
     void Input_MovementController()
@@ -97,7 +110,7 @@ public class PlayerMainController : MonoBehaviour
     {
         if(playerInformation.movingDirection != new Vector3(0, 0, 0))
         {
-            Vector3 positionToPointTo = gameObject.transform.position + (playerInformation.movingDirection * characterProperties.CharacterInformation.movementSpeed);
+            Vector3 positionToPointTo = gameObject.transform.position + (playerInformation.movingDirection * characterProperties.CharacterInformation.MovementSpeed);
             Vector3 currentPosition = gameObject.transform.position;
             float diffPos_X = currentPosition.x - positionToPointTo.x;
             float diffPos_Z = currentPosition.z - positionToPointTo.z;
@@ -108,17 +121,61 @@ public class PlayerMainController : MonoBehaviour
             gameObject.transform.eulerAngles = new Vector3( 0, finalDegree, 0 );
         }
 
-        playerInformation.physicsSystem.velocity = playerInformation.movingDirection * characterProperties.CharacterInformation.movementSpeed;
-        playerInformation.characterAnimator.SetFloat("CurrentVelocity", playerInformation.physicsSystem.velocity.magnitude);
+        Vector3 finalVelocity = playerInformation.movingDirection * characterProperties.CharacterInformation.MovementSpeed;
+        Vector3 finalVelocityWithGravity = new Vector3(finalVelocity.x, playerInformation.physicsSystem.velocity.y, finalVelocity.z);
+        playerInformation.physicsSystem.velocity = finalVelocityWithGravity;
     }
 
-    private void OnCollisionEnter(Collision hitWith)
+    void State_HealthCheck()
     {
-        Rigidbody hitWithPhysics = hitWith.gameObject.GetComponent<Rigidbody>();
-
-        if(hitWithPhysics != null)
+        if (characterProperties.Get_CurrentHealth() <= 0)
         {
-            print("Collide with : " + hitWith.gameObject.name);
+            playerInformation.isAlive = false;
+            playerInformation.damageableChecker.SetActive(false);
+            playerInformation.characterBlocker.SetActive(false);
+            playerInformation.capsuleCollider.enabled = false;
+            playerInformation.physicsSystem.useGravity = false;
+            playerInformation.physicsSystem.drag = 2.0f;
+
+            playerInformation.characterAnimator.SetTrigger("ActiveDeath");
+        }
+        else if (lastedHealth != characterProperties.Get_CurrentHealth())
+        {
+            if (lastedHealth < characterProperties.Get_CurrentHealth())          // Heal
+            {
+
+            }
+            else if (lastedHealth > characterProperties.Get_CurrentHealth())     // Damage
+            {
+                float damageReceive = lastedHealth - characterProperties.Get_CurrentHealth();
+                float ratioDamageToMaxHealth = (damageReceive / characterProperties.CharacterInformation.CharacterHealthPoint) * 100.0f;
+
+                if (ratioDamageToMaxHealth >= 10.0f)
+                {
+                    playerInformation.characterAnimator.SetTrigger("ActiveHit");
+                    playerInformation.Freeze_AllActionFor(0.5f);
+                    playerInformation.End_Attacking();
+                }
+
+                print(gameObject.name + " receive : " + damageReceive + " Damage.");
+            }
+
+            lastedHealth = characterProperties.Get_CurrentHealth();
+        }
+    }
+
+    void State_KnockbackAndKnockupCheck()
+    {
+        if (characterProperties.storedKnockbackForce != Vector3.zero)
+        {
+            playerInformation.physicsSystem.AddForce(characterProperties.storedKnockbackForce);
+            characterProperties.storedKnockbackForce = Vector3.zero;
+        }
+
+        if (characterProperties.storedKnockupForce != Vector3.zero)
+        {
+            playerInformation.physicsSystem.AddForce(characterProperties.storedKnockupForce);
+            characterProperties.storedKnockupForce = Vector3.zero;
         }
     }
 }

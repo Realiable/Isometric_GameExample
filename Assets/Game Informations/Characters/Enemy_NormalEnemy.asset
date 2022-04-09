@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e3578abaf7b7e4f902fb9838750074, type: 3}
   m_Name: Enemy_NormalEnemy
   m_EditorClassIdentifier: 
-  characterLevel: 1
-  characterHealthPoint: 100
-  movementSpeed: 5
-  attackSpeed: 1
-  attackPower: 1
+  CharacterLevel: 1
+  CharacterHealthPoint: 100
+  MovementSpeed: 3
+  AttackSpeed: 1
+  AttackPower: 10

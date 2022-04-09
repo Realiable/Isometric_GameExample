@@ -5,20 +5,32 @@ using UnityEngine;
 public class CharacterProperties : MonoBehaviour
 {
     public Character_BaseProperties CharacterInformation;
+    public GameObject characterModel;
     private int currentHealthPoint = 0;
+
+    [HideInInspector]
+    public Vector3 storedKnockbackForce = Vector3.zero;
+    [HideInInspector]
+    public Vector3 storedKnockupForce = Vector3.zero;
+
+    [HideInInspector]
+    public bool isInvincible = false;
 
     private void Awake()
     {
-        currentHealthPoint = CharacterInformation.characterHealthPoint;
+        currentHealthPoint = CharacterInformation.CharacterHealthPoint;
     }
 
     public void Receive_Damage(int damageAmount)
     {
-        currentHealthPoint -= damageAmount;
-
-        if(currentHealthPoint <= 0)
+        if (isInvincible == false)
         {
-            currentHealthPoint = 0;
+            currentHealthPoint -= damageAmount;
+
+            if (currentHealthPoint <= 0)
+            {
+                currentHealthPoint = 0;
+            }
         }
     }
 
@@ -26,9 +38,30 @@ public class CharacterProperties : MonoBehaviour
     {
         currentHealthPoint += healingAmount;
 
-        if (currentHealthPoint > CharacterInformation.characterHealthPoint)
+        if (currentHealthPoint > CharacterInformation.CharacterHealthPoint)
         {
-            currentHealthPoint = CharacterInformation.characterHealthPoint;
+            currentHealthPoint = CharacterInformation.CharacterHealthPoint;
         }
+    }
+
+    public int Get_CurrentHealth()
+    {
+        return currentHealthPoint;
+    }
+
+    public void Receive_KnockbackForce(float knockbackForce, GameObject knockbackSource)
+    {
+        Vector3 characterPosition = gameObject.transform.position;
+        characterPosition = new Vector3(characterPosition.x, 0, characterPosition.z);
+        Vector3 sourcePosition = knockbackSource.transform.position;
+        sourcePosition = new Vector3(sourcePosition.x, 0, sourcePosition.z);
+        Vector3 directionFromSource = (characterPosition - sourcePosition).normalized;
+
+        storedKnockbackForce += directionFromSource * knockbackForce;
+    }
+
+    public void Receive_KnockupForce(float knockupForce, GameObject knockupSource)
+    {
+        storedKnockupForce = Vector3.up * knockupForce;
     }
 }

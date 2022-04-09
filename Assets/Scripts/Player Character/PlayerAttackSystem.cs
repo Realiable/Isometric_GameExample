@@ -13,6 +13,9 @@ public class PlayerAttackSystem : MonoBehaviour
     {
         characterProperties = gameObject.GetComponent<CharacterProperties>();
         playerInformation = gameObject.GetComponent<PlayerInformation>();
+
+        playerInformation.collision_FrontBox.SetActive(false);
+        playerInformation.collision_CircleAround.SetActive(false);
     }
 
     private void Update()
@@ -22,7 +25,7 @@ public class PlayerAttackSystem : MonoBehaviour
 
     void Input_AttackingController()
     {
-        if (playerInformation.onAttacking == false)
+        if (playerInformation.Can_CharacterAttack() == true)
         {
             if (Input.GetButtonDown("Fire1") == true)
             {
@@ -33,8 +36,11 @@ public class PlayerAttackSystem : MonoBehaviour
             {
                 Do_RangeAttacking();
             }
+        }
 
-            if(Input.GetKeyDown(KeyCode.Space) == true)
+        if (playerInformation.Can_CharacterMobility() == true)
+        {
+            if (Input.GetKeyDown(KeyCode.Space) == true)
             {
                 Do_MobilityMove();
             }
@@ -51,7 +57,7 @@ public class PlayerAttackSystem : MonoBehaviour
             prepareDirection = gameObject.transform.forward;
         }
 
-        Vector3 positionToPointTo = gameObject.transform.position + (prepareDirection * characterProperties.CharacterInformation.movementSpeed);
+        Vector3 positionToPointTo = gameObject.transform.position + (prepareDirection * characterProperties.CharacterInformation.MovementSpeed);
         Vector3 currentPosition = gameObject.transform.position;
         float diffPos_X = currentPosition.x - positionToPointTo.x;
         float diffPos_Z = currentPosition.z - positionToPointTo.z;
@@ -68,6 +74,12 @@ public class PlayerAttackSystem : MonoBehaviour
         Prepare_BeforeAttacking();
         playerInformation.characterAnimator.SetTrigger("ActiveMeleeAttack");
         playerInformation.currentUseSkill = playerInformation.meleeSkill;
+        playerInformation.currentUseSkillType = SkillAttackType.Melee;
+
+        if (playerInformation.currentUseSkill.applyAimAssist == true)
+        {
+            Aim_Assist();
+        }
     }
 
     void Do_RangeAttacking()
@@ -75,16 +87,134 @@ public class PlayerAttackSystem : MonoBehaviour
         playerInformation.onAttacking = true;
         Prepare_BeforeAttacking();
         playerInformation.characterAnimator.SetTrigger("ActiveRangeAttack");
-
         playerInformation.currentUseSkill = playerInformation.rangeSkill;
+        playerInformation.currentUseSkillType = SkillAttackType.Range;
+
+        if (playerInformation.currentUseSkill.applyAimAssist == true)
+        {
+            Aim_Assist();
+        }
     }
 
     void Do_MobilityMove()
     {
+        if(playerInformation.onAttacking == true)
+        {
+            playerInformation.End_Attacking();
+        }
+
         playerInformation.onAttacking = true;
+        playerInformation.onMobility = true;
         Prepare_BeforeAttacking();
         playerInformation.characterAnimator.SetTrigger("ActiveMobility");
-
         playerInformation.currentUseSkill = playerInformation.mobilitySkill;
+        playerInformation.currentUseSkillType = SkillAttackType.Mobility;
+
+        if (playerInformation.currentUseSkill.applyAimAssist == true)
+        {
+            Aim_Assist();
+        }
+    }
+
+    void Aim_Assist()
+    {
+        List<GameObject> enemiesInAssistRange = new List<GameObject>();
+        float rayCastSwipeRange = 2.0f;
+        float rayCastSwipeFrequency = 5.0f;
+
+        Vector3 currentPosition = gameObject.transform.position;
+        Vector3 startRayCastSwipePosition = currentPosition - (gameObject.transform.right * (rayCastSwipeRange / 2.0f)) + new Vector3(0, 1, 0);
+        Vector3 distancePerSwipe = gameObject.transform.right * (rayCastSwipeRange / rayCastSwipeFrequency);
+        float rayCastDistance = playerInformation.currentUseSkill.aimAssistRange;
+
+        for (int index = 0; index < rayCastSwipeFrequency; index++)
+        {
+            RaycastHit rayHitInfo;
+            int layerMask = 1 << 6;
+
+            Vector3 currentRayCastPosition = startRayCastSwipePosition + (distancePerSwipe * index);
+
+            if (Physics.Raycast(currentRayCastPosition, gameObject.transform.forward, out rayHitInfo, rayCastDistance, layerMask) == true)
+            {
+                if (enemiesInAssistRange.Contains(rayHitInfo.collider.gameObject) == false)
+                {
+                    enemiesInAssistRange.Add(rayHitInfo.collider.gameObject);
+                }
+            }
+        }
+
+        GameObject nearestTarget = null;
+        float nearestDistance = 0.0f;
+
+        for (int index = 0; index < enemiesInAssistRange.Count; index++)
+        {
+            Vector3 targetPosition = enemiesInAssistRange[index].transform.position;
+            float diffPos_X = targetPosition.x - currentPosition.x;
+            float diffPos_Z = targetPosition.z - currentPosition.z;
+            float radianToTarget = Mathf.Atan2(diffPos_Z, diffPos_X);
+            float degreeToTarget = radianToTarget * 180.0f / Mathf.PI;
+            float ccwDegreeToTarget = -degreeToTarget + 90.0f;
+            float degreeFromPlayer = ccwDegreeToTarget - Get_ConvertAngle(gameObject.transform.eulerAngles.y);
+            float convertAngle = Get_ConvertAngle(degreeFromPlayer);
+            float convertAngle180 = Get_ConvertAngle180(convertAngle);
+
+            float distanceToTarget = Vector3.Distance(currentPosition, targetPosition);
+            float degreeMultiplier = Mathf.Sqrt( convertAngle180 );
+            float calculatedDistance = distanceToTarget * degreeMultiplier;
+
+            if (index == 0)
+            {
+                nearestTarget = enemiesInAssistRange[index];
+                nearestDistance = calculatedDistance;
+            }
+            else
+            {
+                if(nearestDistance > calculatedDistance)
+                {
+                    nearestTarget = enemiesInAssistRange[index];
+                    nearestDistance = calculatedDistance;
+                }
+            }
+        }
+
+        if(nearestTarget != null)
+        {
+            Vector3 positionToPointTo = nearestTarget.transform.position;
+            float diffPos_X = currentPosition.x - positionToPointTo.x;
+            float diffPos_Z = currentPosition.z - positionToPointTo.z;
+            float radianToTarget = Mathf.Atan2(diffPos_Z, diffPos_X);
+            float degreeToTarget = (radianToTarget * 180.0f) / Mathf.PI;
+            float finalDegree = -degreeToTarget - 90.0f;    // Change Counterclockwise Direction to Clockwise Direction.
+
+            gameObject.transform.eulerAngles = new Vector3(0, finalDegree, 0);
+        }
+    }
+
+    float Get_ConvertAngle(float targetAngle)
+    {
+        float calculatedDegree = targetAngle;
+
+        if (targetAngle >= 360.0f)
+        {
+            calculatedDegree = targetAngle % 360.0f;
+        }
+        else if(targetAngle < 0)
+        {
+            calculatedDegree = 360 - ( Mathf.Abs(targetAngle) % 360);
+        }
+
+        return calculatedDegree;
+    }
+
+    float Get_ConvertAngle180(float targetAngle)
+    {
+        float resultAngle = targetAngle;
+
+        if(resultAngle > 180.0f)
+        {
+            resultAngle = 360 - resultAngle;
+        }
+
+        return resultAngle;
     }
 }

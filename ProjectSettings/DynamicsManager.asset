@@ -9,7 +9,7 @@ PhysicsManager:
   m_BounceThreshold: 2
   m_DefaultMaxDepenetrationVelocity: 10
   m_SleepThreshold: 0.005
-  m_DefaultContactOffset: 0.01
+  m_DefaultContactOffset: 0.1
   m_DefaultSolverIterations: 6
   m_DefaultSolverVelocityIterations: 1
   m_QueriesHitBackfaces: 0
@@ -18,7 +18,7 @@ PhysicsManager:
   m_ClothInterCollisionDistance: 0
   m_ClothInterCollisionStiffness: 0
   m_ContactsGeneration: 1
-  m_LayerCollisionMatrix: 49ffffff08ffffff08ffffffffffffff08ffffff08ffffff89ffffff48ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_LayerCollisionMatrix: 49ffffff08f0ffff08f0ffffffffffff08f0ffff08f0ffff89f8ffff48f0ffff09f3ffff09f9ffff09f8ffff49f6ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
   m_AutoSimulation: 1
   m_AutoSyncTransforms: 0
   m_ReuseCollisionCallbacks: 1

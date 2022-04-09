@@ -13,6 +13,20 @@ MonoBehaviour:
   m_Name: Skill_Roll
   m_EditorClassIdentifier: 
   SkillName: Roll
+  SkillType: 2
   SkillAnimation: {fileID: 7400000, guid: 78ce2f38869d629488a63ba07443d4ae, type: 2}
-  SkillDamageMultiplier: 1
-  PushForwardForce: 500
+  SkillSpeedMultiplier: 1
+  SkillDamageMultiplier: 0
+  PushForwardForce: 600
+  KnockbackForce: 0
+  KnockupForce: 0
+  collisionType: 2
+  collisionWidth: 1
+  collisionHeight: 1
+  collisionRange: 1
+  spawnProjectileObject: {fileID: 0}
+  projectileSpeedMultiplier: 1
+  spawnVFXWhenHit: {fileID: 0}
+  specialBehavior: 1
+  applyAimAssist: 0
+  aimAssistRange: 0

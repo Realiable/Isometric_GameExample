@@ -13,6 +13,20 @@ MonoBehaviour:
   m_Name: Skill_Slash
   m_EditorClassIdentifier: 
   SkillName: Slash
+  SkillType: 0
   SkillAnimation: {fileID: 7400000, guid: 89f1c24ed764cd443ae6eb0b1a6a936d, type: 2}
-  SkillDamageMultiplier: 1
+  SkillSpeedMultiplier: 1
+  SkillDamageMultiplier: 1.5
   PushForwardForce: 150
+  KnockbackForce: 150
+  KnockupForce: 0
+  collisionType: 1
+  collisionWidth: 1.5
+  collisionHeight: 2
+  collisionRange: 1.5
+  spawnProjectileObject: {fileID: 0}
+  projectileSpeedMultiplier: 1
+  spawnVFXWhenHit: {fileID: 1381934695702793390, guid: 2fd9023e9d76b80479104f9d7afcf118, type: 3}
+  specialBehavior: 0
+  applyAimAssist: 1
+  aimAssistRange: 3
