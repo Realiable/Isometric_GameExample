@@ -46,6 +46,11 @@ public class EnemyAnimationNotify : MonoBehaviour
         enemyInformation.Deactive_Invincible();
     }
 
+    public void StartReceive_HoldingInput()
+    {
+        enemyInformation.StartReceive_HoldingInput();
+    }
+
     public void End_Attacking()
     {
         enemyInformation.End_Attacking();

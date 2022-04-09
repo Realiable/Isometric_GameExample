@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c31b6537a63b7db46b3b1e5e4e5ba8e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterInformation: {fileID: 11400000, guid: 12f486e1256571f4794e3773e782658c, type: 2}
+  CharacterInformation: {fileID: 11400000, guid: 4c15c22ffe996124bae1e7c355415264, type: 2}
   characterModel: {fileID: 854635792696111643}
   storedKnockbackForce: {x: 0, y: 0, z: 0}
   storedKnockupForce: {x: 0, y: 0, z: 0}

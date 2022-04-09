@@ -17,7 +17,7 @@ MonoBehaviour:
   SkillAnimation: {fileID: 7400000, guid: 78ce2f38869d629488a63ba07443d4ae, type: 2}
   SkillSpeedMultiplier: 1
   SkillDamageMultiplier: 0
-  PushForwardForce: 600
+  PushForwardForce: 500
   KnockbackForce: 0
   KnockupForce: 0
   collisionType: 2

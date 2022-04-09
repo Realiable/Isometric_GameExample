@@ -45,6 +45,9 @@ public class CharacterInformation : MonoBehaviour
     [HideInInspector]
     public List<GameObject> alreadyDamagedObjectList;
 
+    [HideInInspector]
+    public bool onReceiveForNextInput = false;
+
     int defaultCharacterLayer = 0;
 
     private void Awake()
@@ -115,6 +118,8 @@ public class CharacterInformation : MonoBehaviour
                 projectileBehavior.skillModifierList = Get_CurrentSkillModifier();
             }
         }
+
+        onReceiveForNextInput = true;
     }
 
     public void Apply_SpecialBehavior()
@@ -146,12 +151,19 @@ public class CharacterInformation : MonoBehaviour
         characterProperties.isInvincible = false;
     }
 
+    public void StartReceive_HoldingInput()
+    {
+        onReceiveForNextInput = true;
+    }
+
     public virtual void End_Attacking()
     {
         onAttacking = false;
         onMobility = false;
         Close_AttackCollision();
         Deactive_Invincible();
+
+        onReceiveForNextInput = false;
     }
 
     public void Deal_DamageToTarget(DamageableCollision damageableCollision)

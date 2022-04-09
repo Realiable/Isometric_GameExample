@@ -2,12 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum HoldingAction
+{
+    None = 0,
+    Melee = 1,
+    Range = 2,
+    Mobility = 3,
+}
+
 [RequireComponent(typeof(CharacterProperties))]
 [RequireComponent(typeof(PlayerInformation))]
 public class PlayerAttackSystem : MonoBehaviour
 {
     private CharacterProperties characterProperties;
     private PlayerInformation playerInformation;
+
+    private HoldingAction playerHoldingAction = HoldingAction.None;
 
     private void Start()
     {
@@ -27,6 +37,15 @@ public class PlayerAttackSystem : MonoBehaviour
     {
         if (playerInformation.Can_CharacterAttack() == true)
         {
+            if(playerHoldingAction == HoldingAction.Melee)
+            {
+                Do_MeleeAttacking();
+            }
+            else if(playerHoldingAction == HoldingAction.Range)
+            {
+                Do_RangeAttacking();
+            }
+
             if (Input.GetButtonDown("Fire1") == true)
             {
                 Do_MeleeAttacking();
@@ -37,12 +56,34 @@ public class PlayerAttackSystem : MonoBehaviour
                 Do_RangeAttacking();
             }
         }
-
+        
         if (playerInformation.Can_CharacterMobility() == true)
         {
+            if (playerHoldingAction == HoldingAction.Mobility)
+            {
+                Do_MobilityMove();
+            }
+
             if (Input.GetKeyDown(KeyCode.Space) == true)
             {
                 Do_MobilityMove();
+            }
+        }
+
+        
+        if(playerInformation.onReceiveForNextInput == true)
+        {
+            if (Input.GetKeyDown(KeyCode.Space) == true)
+            {
+                playerHoldingAction = HoldingAction.Mobility;
+            }
+            else if (Input.GetButtonDown("Fire1") == true)
+            {
+                playerHoldingAction = HoldingAction.Melee;
+            }
+            else if (Input.GetButtonDown("Fire2") == true)
+            {
+                playerHoldingAction = HoldingAction.Range;
             }
         }
     }
@@ -80,6 +121,8 @@ public class PlayerAttackSystem : MonoBehaviour
         {
             Aim_Assist();
         }
+
+        playerHoldingAction = HoldingAction.None;
     }
 
     void Do_RangeAttacking()
@@ -94,6 +137,8 @@ public class PlayerAttackSystem : MonoBehaviour
         {
             Aim_Assist();
         }
+
+        playerHoldingAction = HoldingAction.None;
     }
 
     void Do_MobilityMove()
@@ -114,13 +159,15 @@ public class PlayerAttackSystem : MonoBehaviour
         {
             Aim_Assist();
         }
+
+        playerHoldingAction = HoldingAction.None;
     }
 
     void Aim_Assist()
     {
         List<GameObject> enemiesInAssistRange = new List<GameObject>();
-        float rayCastSwipeRange = 2.0f;
-        float rayCastSwipeFrequency = 5.0f;
+        float rayCastSwipeRange = 5.0f;
+        float rayCastSwipeFrequency = 10.0f;
 
         Vector3 currentPosition = gameObject.transform.position;
         Vector3 startRayCastSwipePosition = currentPosition - (gameObject.transform.right * (rayCastSwipeRange / 2.0f)) + new Vector3(0, 1, 0);

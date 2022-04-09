@@ -1682,7 +1682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCharacter: {fileID: 1590953191}
   maximumEnemyEntity: 1
-  increaseMaximumEnemyEntityEvery: 3
+  increaseMaximumEnemyEntityEvery: 5
   spawnEnemyMethod: 0
   chooseSpawnPointMethod: 0
   enemyList:
@@ -2143,6 +2143,7 @@ MonoBehaviour:
   characterModel: {fileID: 861933874}
   storedKnockbackForce: {x: 0, y: 0, z: 0}
   storedKnockupForce: {x: 0, y: 0, z: 0}
+  isInvincible: 0
 --- !u!114 &1590953197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2192,6 +2193,7 @@ MonoBehaviour:
   currentUseSkillType: 0
   currentUseSkill: {fileID: 0}
   alreadyDamagedObjectList: []
+  onReceiveForNextInput: 0
   cameraObject: {fileID: 963194225}
   WeaponSlot_Right: {fileID: 1424783588}
   basedCharacterAnimatorController: {fileID: 22100000, guid: 21e3bc8afe862264d8d65962181d06fa, type: 2}

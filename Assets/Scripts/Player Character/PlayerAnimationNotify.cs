@@ -45,6 +45,11 @@ public class PlayerAnimationNotify : MonoBehaviour
         playerInformation.Deactive_Invincible();
     }
 
+    public void StartReceive_HoldingInput()
+    {
+        playerInformation.StartReceive_HoldingInput();
+    }
+
     public void End_Attacking()
     {
         playerInformation.End_Attacking();
