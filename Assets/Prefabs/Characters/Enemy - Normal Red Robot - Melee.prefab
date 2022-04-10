@@ -230,7 +230,7 @@ MonoBehaviour:
   collision_FrontBox: {fileID: 6881456210518071170}
   collision_CircleAround: {fileID: 5562247662706091590}
   projectileSpawnPoint: {fileID: 4636356451927174782}
-  meleeSkill: {fileID: 11400000, guid: ae82c671b18896a4285a8fe93e3282c5, type: 2}
+  meleeSkill: {fileID: 11400000, guid: 21296d1305799c64ebc12df598ed9aee, type: 2}
   rangeSkill: {fileID: 0}
   mobilitySkill: {fileID: 0}
   meleeSkillModifier: []
@@ -554,7 +554,7 @@ PrefabInstance:
     - target: {fileID: -1649218382573798814, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b38355a2eb2f7004c8192bad4c784b8a, type: 2}
+      objectReference: {fileID: 2100000, guid: 48bf2f1c3df0f1b4f965901ef7431e11, type: 2}
     - target: {fileID: -927199367670048503, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
       propertyPath: m_Name
       value: Robot Kyle

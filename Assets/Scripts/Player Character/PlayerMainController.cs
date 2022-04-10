@@ -19,6 +19,7 @@ public class PlayerMainController : MonoBehaviour
 
         lastedHealth = characterProperties.Get_CurrentHealth();
 
+        SetUI_PlayerHealthBar();
         Setup_PlayerAttackingMotion();
     }
 
@@ -55,6 +56,8 @@ public class PlayerMainController : MonoBehaviour
         Vector3 finalVelocity = playerInformation.movingDirection * characterProperties.CharacterInformation.MovementSpeed;
         Vector3 finalVelocityWithGravity = new Vector3(finalVelocity.x, playerInformation.physicsSystem.velocity.y, finalVelocity.z);
         playerInformation.characterAnimator.SetFloat("CurrentVelocity", finalVelocity.magnitude);
+
+        Update_HealthBarUI();
     }
 
     void Input_MovementController()
@@ -130,12 +133,15 @@ public class PlayerMainController : MonoBehaviour
     {
         if (characterProperties.Get_CurrentHealth() <= 0)
         {
+            playerInformation.End_Attacking();
             playerInformation.isAlive = false;
             playerInformation.damageableChecker.SetActive(false);
             playerInformation.characterBlocker.SetActive(false);
             playerInformation.capsuleCollider.enabled = false;
             playerInformation.physicsSystem.useGravity = false;
             playerInformation.physicsSystem.drag = 2.0f;
+
+            SetUI_PlayerHealthBar();
 
             playerInformation.characterAnimator.SetTrigger("ActiveDeath");
             StartCoroutine(PlayerDeath_Sequence());
@@ -144,7 +150,8 @@ public class PlayerMainController : MonoBehaviour
         {
             if (lastedHealth < characterProperties.Get_CurrentHealth())          // Heal
             {
-
+                float healReceive = characterProperties.Get_CurrentHealth() - lastedHealth;
+                print(gameObject.name + " heal : " + healReceive + " of HP.");
             }
             else if (lastedHealth > characterProperties.Get_CurrentHealth())     // Damage
             {
@@ -162,6 +169,7 @@ public class PlayerMainController : MonoBehaviour
             }
 
             lastedHealth = characterProperties.Get_CurrentHealth();
+            SetUI_PlayerHealthBar();
         }
     }
 
@@ -184,5 +192,19 @@ public class PlayerMainController : MonoBehaviour
             playerInformation.physicsSystem.AddForce(characterProperties.storedKnockupForce);
             characterProperties.storedKnockupForce = Vector3.zero;
         }
+    }
+
+    void SetUI_PlayerHealthBar()
+    {
+        playerInformation.UIText_CurrentHealthValue.text = "" + characterProperties.Get_CurrentHealth();
+        playerInformation.UIText_MaxHealthValue.text = "" + characterProperties.CharacterInformation.CharacterHealthPoint;
+    }
+
+    void Update_HealthBarUI()
+    {
+        float currentHealthRatio = (characterProperties.Get_CurrentHealth() * 1.0f) / characterProperties.CharacterInformation.CharacterHealthPoint;
+        Vector3 targetHealthBarScale = new Vector3(currentHealthRatio, 1, 1);
+        Vector3 currenHealthBarScale = playerInformation.UI_HealthBarValue.transform.localScale;
+        playerInformation.UI_HealthBarValue.transform.localScale = Vector3.Lerp(currenHealthBarScale, targetHealthBarScale, 0.1f);
     }
 }

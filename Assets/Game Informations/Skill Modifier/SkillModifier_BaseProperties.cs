@@ -16,7 +16,7 @@ public enum ApplyEffectType
     None = 0,
     BurnModifier = 1,
     ShockwaveModifier = 2,
-    FreezeModifier = 3,
+    LifeLeechModifier = 3,
     StunModifier = 4,
     ProjectilePlus_2 = 5,
 }

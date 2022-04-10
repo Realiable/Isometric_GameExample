@@ -119,6 +119,7 @@ public class PlayerAttackSystem : MonoBehaviour
         playerInformation.characterAnimator.SetTrigger("ActiveMeleeAttack");
         playerInformation.currentUseSkill = playerInformation.meleeSkill;
         playerInformation.currentUseSkillType = SkillAttackType.Melee;
+        playerInformation.characterAnimator.speed = characterProperties.CharacterInformation.AttackSpeed * playerInformation.currentUseSkill.SkillSpeedMultiplier;
 
         if (playerInformation.currentUseSkill.applyAimAssist == true)
         {
@@ -135,6 +136,7 @@ public class PlayerAttackSystem : MonoBehaviour
         playerInformation.characterAnimator.SetTrigger("ActiveRangeAttack");
         playerInformation.currentUseSkill = playerInformation.rangeSkill;
         playerInformation.currentUseSkillType = SkillAttackType.Range;
+        playerInformation.characterAnimator.speed = characterProperties.CharacterInformation.AttackSpeed * playerInformation.currentUseSkill.SkillSpeedMultiplier;
 
         if (playerInformation.currentUseSkill.applyAimAssist == true)
         {
@@ -157,6 +159,7 @@ public class PlayerAttackSystem : MonoBehaviour
         playerInformation.characterAnimator.SetTrigger("ActiveMobility");
         playerInformation.currentUseSkill = playerInformation.mobilitySkill;
         playerInformation.currentUseSkillType = SkillAttackType.Mobility;
+        playerInformation.characterAnimator.speed = characterProperties.CharacterInformation.AttackSpeed * playerInformation.currentUseSkill.SkillSpeedMultiplier;
 
         if (playerInformation.currentUseSkill.applyAimAssist == true)
         {

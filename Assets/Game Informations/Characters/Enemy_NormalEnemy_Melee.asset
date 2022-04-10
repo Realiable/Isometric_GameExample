@@ -15,5 +15,5 @@ MonoBehaviour:
   CharacterLevel: 1
   CharacterHealthPoint: 50
   MovementSpeed: 3
-  AttackSpeed: 1
-  AttackPower: 10
+  AttackSpeed: 0.5
+  AttackPower: 20

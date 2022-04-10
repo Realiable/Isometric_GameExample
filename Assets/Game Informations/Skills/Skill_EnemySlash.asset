@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b31b4b6af272f49827b2f38d3336d6, type: 3}
+  m_Name: Skill_EnemySlash
+  m_EditorClassIdentifier: 
+  SkillName: Slash
+  SkillType: 0
+  SkillAnimation: {fileID: 7400000, guid: 89f1c24ed764cd443ae6eb0b1a6a936d, type: 2}
+  SkillSpeedMultiplier: 1
+  SkillDamageMultiplier: 1
+  PushForwardForce: 150
+  KnockbackForce: 150
+  KnockupForce: 0
+  collisionType: 1
+  collisionWidth: 1.5
+  collisionHeight: 2
+  collisionRange: 1.5
+  spawnProjectileObject: {fileID: 0}
+  projectileSpeedMultiplier: 1
+  spawnVFXWhenHit: {fileID: 1381934695702793390, guid: 2fd9023e9d76b80479104f9d7afcf118, type: 3}
+  specialBehavior: 0
+  applyAimAssist: 1
+  aimAssistRange: 3

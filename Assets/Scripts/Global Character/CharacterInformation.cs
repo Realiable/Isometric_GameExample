@@ -163,6 +163,7 @@ public class CharacterInformation : MonoBehaviour
         Close_AttackCollision();
         Deactive_Invincible();
 
+        characterAnimator.speed = 1.0f;
         onReceiveForNextInput = false;
     }
 

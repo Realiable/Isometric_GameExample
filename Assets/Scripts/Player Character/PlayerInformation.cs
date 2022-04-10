@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerInformation : CharacterInformation
 {
@@ -8,6 +9,11 @@ public class PlayerInformation : CharacterInformation
     public GameObject cameraObject;
     public GameObject WeaponSlot_Right;
     public AnimatorOverrideController basedCharacterAnimatorController;
+
+    [Header("Player User Interface")]
+    public GameObject UI_HealthBarValue;
+    public TMP_Text UIText_CurrentHealthValue;
+    public TMP_Text UIText_MaxHealthValue;
 
     public bool Check_AvaliableToAddMeleeModifier(SkillModifier_BaseProperties skillModifier)
     {

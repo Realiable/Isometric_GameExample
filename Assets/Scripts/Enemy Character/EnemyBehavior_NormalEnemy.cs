@@ -36,6 +36,7 @@ public class EnemyBehavior_NormalEnemy : EnemyBehavior_Base
     {
         if(characterProperties.Get_CurrentHealth() <= 0)
         {
+            enemyInformation.End_Attacking();
             enemyInformation.isAlive = false;
             enemyInformation.damageableChecker.SetActive(false);
             enemyInformation.characterBlocker.SetActive(false);
@@ -118,7 +119,7 @@ public class EnemyBehavior_NormalEnemy : EnemyBehavior_Base
                 {
                     Rotate_ToPlayer();
 
-                    if (Check_ForAttacking() == false)
+                    if (Check_ForAttacking() == false && enemyInformation.Can_CharacterMove() == true)
                     {
                         Vector3 targetHorizontalVelocity = gameObject.transform.forward * characterProperties.CharacterInformation.MovementSpeed;
                         enemyInformation.physicsSystem.velocity = new Vector3(targetHorizontalVelocity.x, currentVelocity.y, targetHorizontalVelocity.z);
@@ -171,6 +172,7 @@ public class EnemyBehavior_NormalEnemy : EnemyBehavior_Base
                 enemyInformation.currentUseSkillType = SkillAttackType.Melee;
 
                 currentAIState = AI_BehaviorState.Attacking;
+                enemyInformation.characterAnimator.speed = characterProperties.CharacterInformation.AttackSpeed * enemyInformation.currentUseSkill.SkillSpeedMultiplier;
                 enemyInformation.onAttacking = true;
                 enemyInformation.characterAnimator.SetTrigger("ActiveMeleeAttack");
 
@@ -188,6 +190,7 @@ public class EnemyBehavior_NormalEnemy : EnemyBehavior_Base
                 enemyInformation.currentUseSkillType = SkillAttackType.Range;
 
                 currentAIState = AI_BehaviorState.Attacking;
+                enemyInformation.characterAnimator.speed = characterProperties.CharacterInformation.AttackSpeed * enemyInformation.currentUseSkill.SkillSpeedMultiplier;
                 enemyInformation.onAttacking = true;
                 enemyInformation.characterAnimator.SetTrigger("ActiveRangeAttack");
 
