@@ -138,6 +138,7 @@ public class PlayerMainController : MonoBehaviour
             playerInformation.physicsSystem.drag = 2.0f;
 
             playerInformation.characterAnimator.SetTrigger("ActiveDeath");
+            StartCoroutine(PlayerDeath_Sequence());
         }
         else if (lastedHealth != characterProperties.Get_CurrentHealth())
         {
@@ -162,6 +163,12 @@ public class PlayerMainController : MonoBehaviour
 
             lastedHealth = characterProperties.Get_CurrentHealth();
         }
+    }
+
+    IEnumerator PlayerDeath_Sequence()
+    {
+        yield return new WaitForSecondsRealtime(1.0f);
+        GameplayStatistic.Instance.GameOver_ByPlayerDeath();
     }
 
     void State_KnockbackAndKnockupCheck()

@@ -20,7 +20,10 @@ MonoBehaviour:
   CharacterDamageMultiplier: 0.2
   ApplyEffectDuration: 10
   ApplyEffectRange: 0
+  KnockbackForce: 0
+  KnockupForce: 0
   SkillMod_Description: 'Modify an attached Skill to Burn enemies after dealing damage.
+
 
     Deal
     20% of Attack Power per second for 10 second.'

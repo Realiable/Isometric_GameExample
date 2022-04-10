@@ -20,7 +20,13 @@ MonoBehaviour:
   CharacterDamageMultiplier: 0.5
   ApplyEffectDuration: 0
   ApplyEffectRange: 0
+  KnockbackForce: 0
+  KnockupForce: 0
   SkillMod_Description: 'Modify an attached Range Skill to spawn another 2 Projectiles.
+
 
     Spawned
     Projectiles deal 50% of Attack Power.'
+  ApplyModifierObject: {fileID: 0}
+  ApplyModifierInitialVFX: {fileID: 0}
+  ApplyModifierAttachVFX: {fileID: 0}

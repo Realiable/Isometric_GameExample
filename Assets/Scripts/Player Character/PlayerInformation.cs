@@ -8,4 +8,64 @@ public class PlayerInformation : CharacterInformation
     public GameObject cameraObject;
     public GameObject WeaponSlot_Right;
     public AnimatorOverrideController basedCharacterAnimatorController;
+
+    public bool Check_AvaliableToAddMeleeModifier(SkillModifier_BaseProperties skillModifier)
+    {
+        if(meleeSkillModifier.Contains(skillModifier) == true)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool Check_AvaliableToAddRangeModifier(SkillModifier_BaseProperties skillModifier)
+    {
+        if (rangeSkillModifier.Contains(skillModifier) == true)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool Check_AvaliableToAddMobilityModifier(SkillModifier_BaseProperties skillModifier)
+    {
+        if (mobilitySkillModifier.Contains(skillModifier) == true)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public List<SkillModifier_BaseProperties> Get_CurrentMeleeSkillModifer()
+    {
+        return meleeSkillModifier;
+    }
+
+    public List<SkillModifier_BaseProperties> Get_CurrentRangeSkillModifer()
+    {
+        return rangeSkillModifier;
+    }
+
+    public List<SkillModifier_BaseProperties> Get_CurrentMobilitySkillModifer()
+    {
+        return mobilitySkillModifier;
+    }
+
+    public void Add_SkillModifierToMeleeSkill(SkillModifier_BaseProperties skillModifier)
+    {
+        meleeSkillModifier.Add(skillModifier);
+    }
+
+    public void Add_SkillModifierToRangeSkill(SkillModifier_BaseProperties skillModifier)
+    {
+        rangeSkillModifier.Add(skillModifier);
+    }
+
+    public void Add_SkillModifierToMobilitySkill(SkillModifier_BaseProperties skillModifier)
+    {
+        mobilitySkillModifier.Add(skillModifier);
+    }
 }

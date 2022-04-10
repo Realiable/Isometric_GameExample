@@ -24,6 +24,7 @@ MonoBehaviour:
   KnockupForce: 0
   SkillMod_Description: 'Modify an attached Skill to create a Shockwave on impact.
 
+
     Deal
     50% of Attack Power as AOE around the impact point.'
   ApplyModifierObject: {fileID: 4208368332566991526, guid: 0ac2bc6f0c5584146b3503834f811081, type: 3}

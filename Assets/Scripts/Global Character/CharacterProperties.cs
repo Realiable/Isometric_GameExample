@@ -36,11 +36,14 @@ public class CharacterProperties : MonoBehaviour
 
     public void Receive_Healing(int healingAmount)
     {
-        currentHealthPoint += healingAmount;
-
-        if (currentHealthPoint > CharacterInformation.CharacterHealthPoint)
+        if (currentHealthPoint > 0)
         {
-            currentHealthPoint = CharacterInformation.CharacterHealthPoint;
+            currentHealthPoint += healingAmount;
+
+            if (currentHealthPoint > CharacterInformation.CharacterHealthPoint)
+            {
+                currentHealthPoint = CharacterInformation.CharacterHealthPoint;
+            }
         }
     }
 

@@ -30,7 +30,10 @@ public class PlayerAttackSystem : MonoBehaviour
 
     private void Update()
     {
-        Input_AttackingController();
+        if(Time.timeScale != 0.0f)
+        {
+            Input_AttackingController();
+        }
     }
 
     void Input_AttackingController()

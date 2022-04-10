@@ -31,7 +31,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 443eee5fe2eac094fb0d6265d53e117d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyInformation: {fileID: 8718313224410258227}
+  characterInformation: {fileID: 8718313224410258227}
 --- !u!1 &8718313224157707828
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +323,7 @@ MonoBehaviour:
   currentUseSkillType: 0
   currentUseSkill: {fileID: 0}
   alreadyDamagedObjectList: []
+  onReceiveForNextInput: 0
   rotateToTargetSpeed: 0.1
   enemyAttackDelay: 3
 --- !u!114 &8718313224410258236
